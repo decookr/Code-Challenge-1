@@ -4,7 +4,9 @@ $(document).ready(readyNow);
 function readyNow(){
 $("#generateButton").on('click', appendDiv);
 $('#swapColor').toggleClass('active');
-$('#deleteDiv').on('click', removeDiv);
+$('body').on('click', '.deleteDiv', removeDiv);
+$('body').on('click', '.swapColor', swapColor);
+
 
 }//end doc ready
 
@@ -13,18 +15,17 @@ var clicks = 0;
 function appendDiv(){
     clicks += 1;
     console.log('clicked');
-    $('div').append('<p>' + clicks + '</p id="appendedDiv"><button id="swapColor">Swap</button><button id="deleteDiv">Delete</button>');
-    $("#swapColor").on('click', swapColor);
+    $('#target').append('<div class="addedDiv"><p>' + clicks + '</p ><button class="swapColor">Swap</button><button class="deleteDiv">Delete</button></div>');
     
     
 }//appendDiv function
 
 function swapColor(){
-    $(this).closest ('div:parent').css('background-color', 'yellow');
+    $(this).parent().toggleClass('active');
     console.log('yellow click');
     
 }//end swapColor
 
 function removeDiv(){
-    $(this).closest ('div').remove;
+    $(this).parent().remove();
 }
